@@ -23,16 +23,25 @@
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--sand:#FBF5EF;--warm:#F0E8DE;--stone:#C4956A;--deep:#4e2c23;--accent:#f27900;--red:#c90606;--white:#ffffff;--d:"Speak","SpeakTF",Georgia,serif;--b:"Inter",system-ui,sans-serif}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth}section[id]{scroll-margin-top:70px}
     body{background:var(--white);color:var(--deep);font-family:var(--b);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
     nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.5rem 3rem;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(184,169,154,.18)}
     .logo{font-family:var(--d);font-size:1.25rem;font-weight:400;letter-spacing:.04em;color:var(--deep);text-decoration:none}
     .logo span{display:block;font-size:.62rem;font-family:var(--b);font-weight:300;letter-spacing:.18em;text-transform:uppercase;color:var(--stone);margin-top:.1rem}
-    .nav-links{display:flex;gap:2.2rem;list-style:none}
-    .nav-links a{font-size:.76rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--deep);text-decoration:none;opacity:.6;transition:opacity .2s}
-    .nav-links a:hover{opacity:1}
     .nav-cta{font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--accent);padding:.62rem 1.35rem;border-radius:2rem;text-decoration:none;transition:background .2s}
     .nav-cta:hover{background:var(--deep)}
+    .burger{width:44px;height:44px;border:none;background:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:0}
+    .burger span{display:block;width:22px;height:2px;background:var(--deep);border-radius:1px;transition:transform .25s,opacity .25s}
+    .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .burger.open span:nth-child(2){opacity:0}
+    .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    .menu{position:fixed;inset:0;z-index:99;background:var(--sand);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:1.7rem;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+    .menu.open{opacity:1;visibility:visible}
+    .menu a{font-size:1.05rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:var(--deep);text-decoration:none;opacity:.75;transition:opacity .2s}
+    .menu a:hover{opacity:1}
+    .menu a.menu-app{margin-top:1.8rem;font-size:.74rem;opacity:.45;border-bottom:1px solid currentColor;padding-bottom:.15rem}
+    @media(prefers-reduced-motion:reduce){.burger span,.menu{transition:none}}
+    @media(max-width:380px){.nav-cta{padding:.55rem 1rem;font-size:.68rem}}
     .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:4.5rem}.himg img{object-position:30% center!important}
     .hero-text{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 5rem}
     .eyebrow{font-size:.68rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:2rem}
@@ -120,7 +129,7 @@
     .fl{display:flex;gap:1.8rem}
     .fl a{font-size:.7rem;opacity:.28;color:var(--white);text-decoration:none;transition:opacity .2s}
     .fl a:hover{opacity:.65}
-    @media(max-width:900px){:root{--accent:#d96e00}nav{padding:1rem 1.5rem} section[style*="padding:5rem;background:var(--accent)"]{padding:4rem 1.5rem!important}.nav-links{display:none}.hero{grid-template-columns:1fr;min-height:auto}.himg{height:55vw;min-height:240px}.hero-text{padding:3rem 1.5rem}.stats{gap:2rem}.leuchtt,.fw-g,.ko{grid-template-columns:1fr;gap:3rem}.leuchtt,.auge,.ang,.fw,.stim,.pr,.ko{padding:5rem 1.5rem}.ag,.sg,.pg{grid-template-columns:1fr}footer{flex-direction:column;gap:.9rem;padding:1.7rem 1.5rem;text-align:center}.fl{justify-content:center}}
+    @media(max-width:900px){:root{--accent:#d96e00}nav{padding:1rem 1.5rem} section[style*="padding:5rem;background:var(--accent)"]{padding:4rem 1.5rem!important}.hero{grid-template-columns:1fr;min-height:auto}.himg{height:55vw;min-height:240px}.hero-text{padding:3rem 1.5rem}.stats{gap:2rem}.leuchtt,.fw-g,.ko{grid-template-columns:1fr;gap:3rem}.leuchtt,.auge,.ang,.fw,.stim,.pr,.ko{padding:5rem 1.5rem}.ag,.sg,.pg{grid-template-columns:1fr}footer{flex-direction:column;gap:.9rem;padding:1.7rem 1.5rem;text-align:center}.fl{justify-content:center}}
 
     .kurse{padding:7rem 5rem;background:var(--deep);color:var(--white)}
     .kurse .sh{color:var(--sand)}
@@ -152,19 +161,23 @@
 <nav>
   <div style="display:flex;align-items:center;gap:1.5rem"><a href="#" class="logo"><img src="logo.png" alt="amica mea" style="height:52px;width:auto;display:block" /></a>
   </div>
-  <ul class="nav-links">
-    <li><a href="#angebot">Angebot</a></li>
-    <li><a href="#fuerwen">Für wen</a></li>
-    <li><a href="#kurse">Kurse</a></li>
-    <li><a href="#stimmen">Stimmen</a></li>
-    <li><a href="#preise">Preise</a></li>
-    <li><a href="#kontakt">Kontakt</a></li>
-  </ul>
-  <div style="display:flex;align-items:center;gap:.5rem">
-    <a href="https://amica-mea.netlify.app/kursplan.html" target="_blank" style="font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--white);background:var(--deep);padding:.62rem 1.35rem;border-radius:2rem;text-decoration:none;white-space:nowrap">Kursplan</a>
-    <a href="https://amica-mea.netlify.app" class="nav-cta" style="white-space:nowrap">Zur App</a>
+  <div style="display:flex;align-items:center;gap:.6rem">
+    <a href="#testen" class="nav-cta" style="white-space:nowrap">7 Tage testen</a>
+    <button id="burger" class="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+
+<div id="menu" class="menu">
+  <a href="#angebot">Warum Amica Mea?</a>
+  <a href="#kurse">Kurse</a>
+  <a href="#stimmen">Erfahrungen</a>
+  <a href="#preise">Preise</a>
+  <a href="https://amica-mea.netlify.app/kursplan.html" target="_blank" rel="noopener">Kursplan</a>
+  <a href="#kontakt">Kontakt</a>
+  <a href="https://amica-mea.netlify.app" class="menu-app">Zur App</a>
+</div>
 
 <section class="hero">
   <div class="hero-text">
@@ -296,7 +309,7 @@
   </div>
 </section>
 
-<section style="padding:5rem;background:var(--deep);text-align:center">
+<section id="testen" style="padding:5rem;background:var(--deep);text-align:center">
   <p style="font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:1rem">Unverbindlich testen.</p>
   <h2 style="font-family:'Speak','SpeakTF',Georgia,serif;font-size:clamp(2rem,3vw,3rem);font-weight:300;color:var(--white);line-height:1.15;margin-bottom:1.5rem">7 Tage.<br/>Alles drin.</h2>
   <p style="font-size:.97rem;font-weight:300;line-height:1.82;color:rgba(255,255,255,.8);max-width:520px;margin:0 auto 2.5rem">Eine Woche lang kostenlos testen — Kurse, Videos, Community. Einfach ausprobieren, ganz ohne Druck. Danach entscheidest du, ob du bleibst.<br/><br/>Bei der Registrierung kannst du deine Ziele, Wünsche und gesundheitlichen Besonderheiten eintragen. So können wir dich vom ersten Tag an persönlich begleiten.</p>
@@ -479,11 +492,25 @@
 
 <footer>
   <p>© 2026 amica mea – das Fitnessloft für Frauen · Eva Böhner · Leskanpark, Halle 10 · Waltherstraße 49–51 · 51069 Köln</p>
-  <div class="fl"><a href="/impressum">Impressum</a><a href="/datenschutz">Datenschutz</a></div>
+  <div class="fl"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></div>
 </footer>
 
 
 <script>
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('menu');
+  function toggleMenu(force) {
+    const open = force !== undefined ? force : !menu.classList.contains('open');
+    menu.classList.toggle('open', open);
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open);
+    burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', () => toggleMenu());
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggleMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleMenu(false); });
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
